@@ -1,12 +1,12 @@
 Summary:	GeoIP database files for xt_geoip
 Name:		xtables-geoip
-Version:	20090401
+Version:	20090901
 Release:	1
 License:	GPL
 Group:		Networking/Admin
 URL:		http://maxmind.com/
 Source0:	http://jengelh.medozas.de/files/geoip/geoip_iv0_database-%{version}.tar.bz2
-# Source0-md5:	0cd65043c6165ed49a611c2cd4bc2fb4
+# Source0-md5:	896cb23ada582ac945dcd4af305884fe
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
