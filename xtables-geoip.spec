@@ -1,10 +1,13 @@
+# TODO
+# - build from source using http://jengelh.medozas.de/files/geoip/geoip_src.tar.bz2
+# - make it arch dependant and package only LE or BE dirs?
 Summary:	GeoIP database files for xt_geoip
 Name:		xtables-geoip
 Version:	20090901
 Release:	1
 License:	GPL
 Group:		Networking/Admin
-URL:		http://maxmind.com/
+URL:		http://www.maxmind.com/
 Source0:	http://jengelh.medozas.de/files/geoip/geoip_iv0_database-%{version}.tar.bz2
 # Source0-md5:	896cb23ada582ac945dcd4af305884fe
 BuildArch:	noarch
@@ -21,8 +24,8 @@ module.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/var/lib/geoip/{B,L}E
-install geoip/BE/* $RPM_BUILD_ROOT/var/lib/geoip/BE
-install geoip/LE/* $RPM_BUILD_ROOT/var/lib/geoip/LE
+cp -a geoip/BE/* $RPM_BUILD_ROOT/var/lib/geoip/BE
+cp -a geoip/LE/* $RPM_BUILD_ROOT/var/lib/geoip/LE
 
 %clean
 rm -rf $RPM_BUILD_ROOT
