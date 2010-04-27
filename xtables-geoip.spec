@@ -4,7 +4,7 @@
 Summary:	GeoIP database files for xt_geoip
 Name:		xtables-geoip
 Version:	20090901
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Admin
 URL:		http://www.maxmind.com/
@@ -12,6 +12,8 @@ Source0:	http://jengelh.medozas.de/files/geoip/geoip_iv0_database-%{version}.tar
 # Source0-md5:	896cb23ada582ac945dcd4af305884fe
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		dbdir	/usr/share/xt_geoip
 
 %description
 The package contains the GeoIP definition files (which IP addresses
@@ -23,13 +25,13 @@ module.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/var/lib/geoip/{B,L}E
-cp -a geoip/BE/* $RPM_BUILD_ROOT/var/lib/geoip/BE
-cp -a geoip/LE/* $RPM_BUILD_ROOT/var/lib/geoip/LE
+install -d $RPM_BUILD_ROOT%{dbdir}/{B,L}E
+cp -a geoip/BE/* $RPM_BUILD_ROOT%{dbdir}/BE
+cp -a geoip/LE/* $RPM_BUILD_ROOT%{dbdir}/LE
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-/var/lib/geoip
+%{dbdir}
