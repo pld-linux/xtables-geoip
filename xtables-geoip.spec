@@ -13,7 +13,7 @@ Source1:	http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
 # Source1-md5:	a8ed621bc988012100619fcea0c66956
 Source2:	http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
 # Source2-md5:	a1381bd1aa0a0c91dc31b3f1e847cf4a
-BuildRequires:	perl-Text-CSV_XS
+BuildRequires:	perl-Text-CSV_XS >= 0.69
 BuildRequires:	perl-base
 BuildRequires:	unzip
 BuildArch:	noarch
