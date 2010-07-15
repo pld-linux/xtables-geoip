@@ -3,7 +3,7 @@
 Summary:	GeoIP database files for xt_geoip
 Name:		xtables-geoip
 Version:	20100402
-Release:	1
+Release:	2
 License:	GPL, Open Data License
 Group:		Networking/Admin
 URL:		http://www.maxmind.com/
