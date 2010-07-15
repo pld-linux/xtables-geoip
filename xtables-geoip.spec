@@ -2,15 +2,15 @@
 # - make it arch dependant and package only LE or BE dirs?
 Summary:	GeoIP database files for xt_geoip
 Name:		xtables-geoip
-Version:	20100402
-Release:	2
+Version:	20100702
+Release:	1
 License:	GPL, Open Data License
 Group:		Networking/Admin
 URL:		http://www.maxmind.com/
 Source0:	http://jengelh.medozas.de/files/geoip/geoip_src.tar.bz2
 # Source0-md5:	bbcb1edd6ce2ece229d3e61173c7cadc
 Source1:	http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
-# Source1-md5:	a8ed621bc988012100619fcea0c66956
+# Source1-md5:	07b16052593867747403c7c6841d3e7b
 Source2:	http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
 # Source2-md5:	a1381bd1aa0a0c91dc31b3f1e847cf4a
 BuildRequires:	perl-Text-CSV_XS >= 0.69
