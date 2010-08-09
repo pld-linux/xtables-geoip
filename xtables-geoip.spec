@@ -1,14 +1,14 @@
 Summary:	GeoIP database files for xt_geoip
 Name:		xtables-geoip
-Version:	20100702
-Release:	2
+Version:	20100802
+Release:	1
 License:	GPL, Open Data License
 Group:		Networking/Admin
 URL:		http://www.maxmind.com/
 Source0:	http://jengelh.medozas.de/files/geoip/geoip_src.tar.bz2
 # Source0-md5:	bbcb1edd6ce2ece229d3e61173c7cadc
 Source1:	http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
-# Source1-md5:	07b16052593867747403c7c6841d3e7b
+# Source1-md5:	1f67a4cb38b49eae4d64636557d0d1a7
 Source2:	http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
 # Source2-md5:	a1381bd1aa0a0c91dc31b3f1e847cf4a
 BuildRequires:	perl-Text-CSV_XS >= 0.69
@@ -45,9 +45,9 @@ cp -a %{SOURCE2} .
 install -d %{byteorder}
 cd %{byteorder}
 %if "%{byteorder}" == "BE"
-%{__perl} ../geoip_csv_iv0.pl -b ../GeoIPCountryWhois.csv
+%{__perl} ../geoip_csv_iv0.pl -b ../GeoIPCountryWhois.csv | tee ../ranges.txt
 %else
-%{__perl} ../geoip_csv_iv0.pl ../GeoIPCountryWhois.csv
+%{__perl} ../geoip_csv_iv0.pl ../GeoIPCountryWhois.csv | tee ../ranges.txt
 %endif
 
 %install
@@ -60,6 +60,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc LICENSE.txt
+%doc LICENSE.txt ranges.txt
 %dir %{dbdir}
 %{dbdir}/%{byteorder}
