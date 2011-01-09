@@ -45,7 +45,7 @@ cp -a %{SOURCE1} .
 %build
 install -d %{byteorder}
 %if "%{byteorder}" == "BE"
-%{__perl} %{SOURCE2} -D %{byteorder} -b ../GeoIPCountryWhois.csv | tee ranges.txt
+%{__perl} %{SOURCE2} -D %{byteorder} -b GeoIPCountryWhois.csv | tee ranges.txt
 %else
 %{__perl} %{SOURCE2} -D %{byteorder} GeoIPCountryWhois.csv | tee ranges.txt
 %endif
