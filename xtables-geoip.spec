@@ -1,16 +1,18 @@
 Summary:	GeoIP database files for xt_geoip
 Name:		xtables-geoip
-Version:	20110202
+Version:	20110404
 Release:	1
 License:	GPL, Open Data License
 Group:		Networking/Admin
 URL:		http://www.maxmind.com/
 Source0:	http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
-# Source0-md5:	8349b51b0de83b7ef906c3dd4918e5e9
-Source1:	http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
-# Source1-md5:	a1381bd1aa0a0c91dc31b3f1e847cf4a
-Source2:	http://xtables-addons.git.sf.net/git/gitweb.cgi?p=xtables-addons/xtables-addons;a=blob_plain;f=geoip/geoip_build_db.pl
-# Source2-md5:	7cd5c1ab1d83a94d84ae918f0805603f
+# Source0-md5:	37cf1951b9ecced2612f8ff0c0bd3eaa
+Source1:	http://geolite.maxmind.com/download/geoip/database/GeoIPv6.csv.gz
+# Source1-md5:	4956a5ab8ecd2dd078420faa5552f09f
+Source2:	http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
+# Source2-md5:	a1381bd1aa0a0c91dc31b3f1e847cf4a
+Source3:	http://xtables-addons.git.sourceforge.net/git/gitweb.cgi?p=xtables-addons/xtables-addons;a=blob_plain;f=geoip/xt_geoip_build
+# Source3-md5:	9933235c5d9c4c7fbad965d6317f8c2f
 BuildRequires:	perl-Text-CSV_XS >= 0.69
 BuildRequires:	perl-base
 BuildRequires:	unzip
@@ -40,14 +42,15 @@ if [ "$ver" != %{version} ]; then
 	exit 1
 fi
 
-cp -a %{SOURCE1} .
+gunzip -c %{SOURCE1} >GeoIPv6.csv
+cp -a %{SOURCE2} .
 
 %build
 install -d %{byteorder}
 %if "%{byteorder}" == "BE"
-%{__perl} %{SOURCE2} -D %{byteorder} -b GeoIPCountryWhois.csv | tee ranges.txt
+%{__perl} %{SOURCE3} -D %{byteorder} -b GeoIPCountryWhois.csv GeoIPv6.csv | tee ranges.txt
 %else
-%{__perl} %{SOURCE2} -D %{byteorder} GeoIPCountryWhois.csv | tee ranges.txt
+%{__perl} %{SOURCE3} -D %{byteorder} GeoIPCountryWhois.csv GeoIPv6.csv | tee ranges.txt
 %endif
 
 %install
