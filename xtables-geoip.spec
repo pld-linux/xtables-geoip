@@ -1,7 +1,7 @@
 Summary:	GeoIP database files for xt_geoip
 Name:		xtables-geoip
 Version:	20110404
-Release:	1
+Release:	2
 License:	GPL, Open Data License
 Group:		Networking/Admin
 URL:		http://www.maxmind.com/
@@ -47,11 +47,7 @@ cp -a %{SOURCE2} .
 
 %build
 install -d %{byteorder}
-%if "%{byteorder}" == "BE"
-%{__perl} %{SOURCE3} -D %{byteorder} -b GeoIPCountryWhois.csv GeoIPv6.csv | tee ranges.txt
-%else
-%{__perl} %{SOURCE3} -D %{byteorder} GeoIPCountryWhois.csv GeoIPv6.csv | tee ranges.txt
-%endif
+%{__perl} %{SOURCE3} GeoIPCountryWhois.csv GeoIPv6.csv | tee ranges.txt
 
 %install
 rm -rf $RPM_BUILD_ROOT
