@@ -46,13 +46,12 @@ gunzip -c %{SOURCE1} >GeoIPv6.csv
 cp -p %{SOURCE2} .
 
 %build
-install -d %{byteorder}
 %{__perl} %{SOURCE3} GeoIPCountryWhois.csv GeoIPv6.csv | tee ranges.txt
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{dbdir}/%{byteorder}
-cp -a %{byteorder}/* $RPM_BUILD_ROOT%{dbdir}/%{byteorder}
+install -d $RPM_BUILD_ROOT%{dbdir}
+cp -a %{byteorder} $RPM_BUILD_ROOT%{dbdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
