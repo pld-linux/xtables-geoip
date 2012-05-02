@@ -63,6 +63,10 @@ cp -a %{byteorder} $RPM_BUILD_ROOT%{dbdir}
 for a in $RPM_BUILD_ROOT%{dbdir}/%{byteorder}/*.iv4; do
 	ln $a ${a%.iv4}.iv0
 done
+# kernel-net-xtables-addons-1.18-8@2.6.27.45_1.i686  searches from /var/lib:
+# Could not open /var/lib/geoip/LE/EE.iv0: No such file or directory
+install -d $RPM_BUILD_ROOT/var/lib
+ln -s %{_datadir}/xt_geoip $RPM_BUILD_ROOT/var/lib/geoip
 %endif
 
 %clean
@@ -73,3 +77,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc LICENSE.txt ranges.txt
 %dir %{dbdir}
 %{dbdir}/%{byteorder}
+
+%if "%{pld_release}" == "ac"
+/var/lib/geoip
+%endif
