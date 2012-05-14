@@ -1,7 +1,7 @@
 Summary:	GeoIP database files for xt_geoip
 Name:		xtables-geoip
 Version:	20120501
-Release:	2
+Release:	3
 License:	GPL, Open Data License
 Group:		Networking/Admin
 URL:		http://www.maxmind.com/
@@ -74,6 +74,8 @@ ln -s %{_datadir}/xt_geoip $RPM_BUILD_ROOT/var/lib/geoip
 # this needs to be a symlink
 if [ -d /var/lib/geoip -a ! -L /var/lib/geoip ]; then
 	mv -f /var/lib/geoip{,.rpmsave}
+	install -d %{dbdir}
+	ln -s %{dbdir} /var/lib/geoip
 fi
 %endif
 
