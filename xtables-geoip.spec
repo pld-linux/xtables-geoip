@@ -1,7 +1,7 @@
 Summary:	GeoIP database files for xt_geoip
 Name:		xtables-geoip
 Version:	20120501
-Release:	1
+Release:	2
 License:	GPL, Open Data License
 Group:		Networking/Admin
 URL:		http://www.maxmind.com/
@@ -67,6 +67,14 @@ done
 # Could not open /var/lib/geoip/LE/EE.iv0: No such file or directory
 install -d $RPM_BUILD_ROOT/var/lib
 ln -s %{_datadir}/xt_geoip $RPM_BUILD_ROOT/var/lib/geoip
+%endif
+
+%if "%{pld_release}" == "ac"
+%pretrans
+# this needs to be a symlink
+if [ -d /var/lib/geoip -a ! -L /var/lib/geoip ]; then
+	mv -f /var/lib/geoip{,.rpmsave}
+fi
 %endif
 
 %clean
