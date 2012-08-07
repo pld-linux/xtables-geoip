@@ -1,14 +1,14 @@
 Summary:	GeoIP database files for xt_geoip
 Name:		xtables-geoip
-Version:	20120704
-Release:	3
+Version:	20120706
+Release:	1
 License:	GPL, Open Data License
 Group:		Networking/Admin
 URL:		http://www.maxmind.com/
 Source0:	http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
 # Source0-md5:	a2f038b8c46e28ccfeaa21e6322decd1
 Source1:	http://geolite.maxmind.com/download/geoip/database/GeoIPv6.csv.gz
-# Source1-md5:	ddd56306ba1802c139a4490d199295df
+# Source1-md5:	d99ddc2d5a6274d6a373bf42cb97588a
 Source2:	http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
 # Source2-md5:	a1381bd1aa0a0c91dc31b3f1e847cf4a
 Source3:	http://xtables-addons.git.sourceforge.net/git/gitweb.cgi?p=xtables-addons/xtables-addons;a=blob_plain;f=geoip/xt_geoip_build
@@ -37,13 +37,20 @@ module.
 
 %prep
 %setup -qc
+gunzip -c %{SOURCE1} > GeoIPv6.csv
+touch -r %{SOURCE1} GeoIPv6.csv
 
-ver=$(stat -c '%y' GeoIPCountryWhois.csv | awk '{print $1}' | tr -d -)
+ver4=$(stat -c '%y' GeoIPCountryWhois.csv | awk '{print $1}' | tr -d -)
+ver6=$(stat -c '%y' GeoIPv6.csv | awk '{print $1}' | tr -d -)
+if [ "$ver4" -gt "$ver6" ]; then
+	ver=$ver4
+else
+	ver=$ver6
+fi
 if [ "$ver" != %{version} ]; then
 	exit 1
 fi
 
-gunzip -c %{SOURCE1} >GeoIPv6.csv
 cp -p %{SOURCE2} .
 
 %build
