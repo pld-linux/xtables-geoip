@@ -12,7 +12,7 @@ Source1:	http://geolite.maxmind.com/download/geoip/database/GeoIPv6.csv.gz
 Source2:	http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
 # Source2-md5:	a1381bd1aa0a0c91dc31b3f1e847cf4a
 Source3:	http://xtables-addons.git.sourceforge.net/git/gitweb.cgi?p=xtables-addons/xtables-addons;a=blob_plain;f=geoip/xt_geoip_build
-# Source3-md5:	9933235c5d9c4c7fbad965d6317f8c2f
+# Source3-md5:	76c6959bad03c1ff064aefcb4811cd92
 BuildRequires:	perl-Text-CSV_XS >= 0.69
 BuildRequires:	perl-base
 BuildRequires:	rpm >= 4.4.9-56
