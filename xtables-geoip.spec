@@ -46,8 +46,8 @@ xtables-addons.
 gunzip -c %{SOURCE1} > GeoIPv6.csv
 touch -r %{SOURCE1} GeoIPv6.csv
 
-ver4=$(stat -c '%y' GeoIPCountryWhois.csv | awk '{print $1}' | tr -d -)
-ver6=$(stat -c '%y' GeoIPv6.csv | awk '{print $1}' | tr -d -)
+ver4=$(TZ=GMT stat -c '%y' GeoIPCountryWhois.csv | awk '{print $1}' | tr -d -)
+ver6=$(TZ=GMT stat -c '%y' GeoIPv6.csv | awk '{print $1}' | tr -d -)
 if [ "$ver4" -gt "$ver6" ]; then
 	ver=$ver4
 else
