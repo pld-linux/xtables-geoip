@@ -1,12 +1,12 @@
 Summary:	GeoIP database files for xt_geoip
 Summary(pl.UTF-8):	Pliki baz danych GeoIP dla xt_geoip
 Name:		xtables-geoip
-Version:	20150603
+Version:	20150708
 Release:	1
 License:	GPL, Open Data License
 Group:		Networking/Admin
 Source0:	http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
-# Source0-md5:	b683caed6d436126475a9f57299b6033
+# Source0-md5:	2a985413d79c7f778f6cb400688571f5
 Source1:	http://geolite.maxmind.com/download/geoip/database/GeoIPv6.csv.gz
 # Source1-md5:	f2501943c757f8677e2f8a44b4aae3fa
 Source2:	http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
