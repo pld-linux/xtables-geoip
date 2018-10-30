@@ -1,18 +1,16 @@
 Summary:	GeoIP database files for xt_geoip
 Summary(pl.UTF-8):	Pliki baz danych GeoIP dla xt_geoip
 Name:		xtables-geoip
-Version:	20181024
+Version:	20181023
 Release:	1
 License:	GPL, Open Data License
 Group:		Networking/Admin
-Source0:	http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
-# Source0-md5:	4e22dd36f85737f45f8595d0ba1f2e85
-Source1:	http://geolite.maxmind.com/download/geoip/database/GeoIPv6.csv.gz
-# Source1-md5:	f546eba297b1f325e22a7a20542b61d7
-Source2:	http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
-# Source2-md5:	a1381bd1aa0a0c91dc31b3f1e847cf4a
-Source3:	http://sourceforge.net/p/xtables-addons/xtables-addons/ci/master/tree/geoip/xt_geoip_build?format=raw&/xt_geoip_build
-# Source3-md5:	4dcd62c8b2c8b90cc88e961613118be3
+Source0:	http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country-CSV.zip
+# Source0-md5:	1f5524d5ac54a779831bffc57d91e2a2
+Source1:	http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
+# Source1-md5:	a1381bd1aa0a0c91dc31b3f1e847cf4a
+Source2:	http://sourceforge.net/p/xtables-addons/xtables-addons/ci/master/tree/geoip/xt_geoip_build?format=raw&/xt_geoip_build
+# Source2-md5:	462ca00be38471d19dc6e0f32c098275
 URL:		http://www.maxmind.com/
 BuildRequires:	perl-Text-CSV_XS >= 0.69
 BuildRequires:	perl-base
@@ -43,24 +41,17 @@ xtables-addons.
 
 %prep
 %setup -qc
-gunzip -c %{SOURCE1} > GeoIPv6.csv
-touch -r %{SOURCE1} GeoIPv6.csv
 
-ver4=$(TZ=GMT stat -c '%y' GeoIPCountryWhois.csv | awk '{print $1}' | tr -d -)
-ver6=$(TZ=GMT stat -c '%y' GeoIPv6.csv | awk '{print $1}' | tr -d -)
-if [ "$ver4" -gt "$ver6" ]; then
-	ver=$ver4
-else
-	ver=$ver6
-fi
+ver=$(ls -d GeoLite2-Country-CSV_* | head -1 | %{__sed} 's/^GeoLite2-Country-CSV_//')
 if [ "$ver" != %{version} ]; then
 	exit 1
 fi
 
-cp -p %{SOURCE2} .
+cp -p %{SOURCE1} .
 
 %build
-%{__perl} %{SOURCE3} GeoIPCountryWhois.csv GeoIPv6.csv | tee ranges.txt
+%{__mkdir} %{byteorder}
+%{__perl} %{SOURCE2} -S GeoLite2-Country-CSV_%{version} -D %{byteorder} > ranges.txt
 
 %install
 rm -rf $RPM_BUILD_ROOT
