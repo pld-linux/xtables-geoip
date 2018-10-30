@@ -1,7 +1,7 @@
 Summary:	GeoIP database files for xt_geoip
 Summary(pl.UTF-8):	Pliki baz danych GeoIP dla xt_geoip
 Name:		xtables-geoip
-Version:	20181024
+Version:	20181023
 Release:	1
 License:	GPL, Open Data License
 Group:		Networking/Admin
@@ -36,7 +36,8 @@ xtables-addons.
 %prep
 %setup -qc
 
-ver=$(ls -d GeoLite2-Country-CSV_* | head -1 | %{__sed} 's/^GeoLite2-Country-CSV_//')
+ver=$(echo GeoLite2-Country-CSV_*)
+ver=${ver#GeoLite2-Country-CSV_}
 if [ "$ver" != %{version} ]; then
 	exit 1
 fi
