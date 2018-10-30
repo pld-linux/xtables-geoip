@@ -1,7 +1,7 @@
 Summary:	GeoIP database files for xt_geoip
 Summary(pl.UTF-8):	Pliki baz danych GeoIP dla xt_geoip
 Name:		xtables-geoip
-Version:	20181023
+Version:	20181024
 Release:	1
 License:	GPL, Open Data License
 Group:		Networking/Admin
