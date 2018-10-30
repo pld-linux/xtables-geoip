@@ -23,12 +23,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # no debuginfo to package
 %define		_enable_debug_packages	0
 
-%ifarch ppc ppc64 s390 s390x sparc sparc64 sparcv9
-%define		byteorder	BE
-%else
-%define		byteorder	LE
-%endif
-
 %description
 The package contains the GeoIP definition files (which IP addresses
 belong to which country) that are needed for Xtables-addons's xt_geoip
@@ -50,13 +44,13 @@ fi
 cp -p %{SOURCE1} .
 
 %build
-%{__mkdir} %{byteorder}
-%{__perl} %{SOURCE2} -S GeoLite2-Country-CSV_%{version} -D %{byteorder} > ranges.txt
+%{__mkdir} out
+%{__perl} %{SOURCE2} -S GeoLite2-Country-CSV_%{version} -D out > ranges.txt
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{dbdir}
-cp -a %{byteorder} $RPM_BUILD_ROOT%{dbdir}
+cp -a out/* $RPM_BUILD_ROOT%{dbdir}
 
 %if "%{pld_release}" == "ac"
 # handle older xtables in ac:
@@ -64,7 +58,7 @@ cp -a %{byteorder} $RPM_BUILD_ROOT%{dbdir}
 # still having old .iv0 names requirement
 # http://xtables-addons.git.sourceforge.net/git/gitweb.cgi?p=xtables-addons/xtables-addons;a=commitdiff;h=25bf680ead80e505d5073308f151b4007cb5683f
 # create hardlink, to be most compatible
-for a in $RPM_BUILD_ROOT%{dbdir}/%{byteorder}/*.iv4; do
+for a in $RPM_BUILD_ROOT%{dbdir}/*.iv4; do
 	ln $a ${a%.iv4}.iv0
 done
 # kernel-net-xtables-addons-1.18-8@2.6.27.45_1.i686  searches from /var/lib:
@@ -89,8 +83,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc LICENSE.txt ranges.txt
-%dir %{dbdir}
-%{dbdir}/%{byteorder}
+%{dbdir}
 
 %if "%{pld_release}" == "ac"
 /var/lib/geoip
