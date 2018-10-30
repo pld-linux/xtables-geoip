@@ -52,39 +52,10 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{dbdir}
 cp -a out/* $RPM_BUILD_ROOT%{dbdir}
 
-%if "%{pld_release}" == "ac"
-# handle older xtables in ac:
-# kernel-net-xtables-addons-1.18-15@2.6.27.53_1.amd64
-# still having old .iv0 names requirement
-# http://xtables-addons.git.sourceforge.net/git/gitweb.cgi?p=xtables-addons/xtables-addons;a=commitdiff;h=25bf680ead80e505d5073308f151b4007cb5683f
-# create hardlink, to be most compatible
-for a in $RPM_BUILD_ROOT%{dbdir}/*.iv4; do
-	ln $a ${a%.iv4}.iv0
-done
-# kernel-net-xtables-addons-1.18-8@2.6.27.45_1.i686  searches from /var/lib:
-# Could not open /var/lib/geoip/LE/EE.iv0: No such file or directory
-install -d $RPM_BUILD_ROOT/var/lib
-ln -s %{_datadir}/xt_geoip $RPM_BUILD_ROOT/var/lib/geoip
-%endif
-
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%if "%{pld_release}" == "ac"
-%pretrans
-# this needs to be a symlink
-if [ -d /var/lib/geoip -a ! -L /var/lib/geoip ]; then
-	mv -f /var/lib/geoip{,.rpmsave}
-	install -d %{dbdir}
-	ln -s %{dbdir} /var/lib/geoip
-fi
-%endif
 
 %files
 %defattr(644,root,root,755)
 %doc LICENSE.txt ranges.txt
 %{dbdir}
-
-%if "%{pld_release}" == "ac"
-/var/lib/geoip
-%endif
