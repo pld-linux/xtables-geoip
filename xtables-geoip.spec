@@ -5,13 +5,13 @@ Version:	20181030
 Release:	1
 License:	GPL, Open Data License
 Group:		Networking/Admin
-Source0:	http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country-CSV.zip
-# Source0-md5:	1f5524d5ac54a779831bffc57d91e2a2
-Source1:	http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
+Source0:	https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country-CSV.zip
+# Source0-md5:	8527b411dfd72d39ff0556c703ca7f80
+Source1:	https://geolite.maxmind.com/download/geoip/database/LICENSE.txt
 # Source1-md5:	a1381bd1aa0a0c91dc31b3f1e847cf4a
-Source2:	http://sourceforge.net/p/xtables-addons/xtables-addons/ci/master/tree/geoip/xt_geoip_build?format=raw&/xt_geoip_build
+Source2:	https://sourceforge.net/p/xtables-addons/xtables-addons/ci/master/tree/geoip/xt_geoip_build?format=raw&/xt_geoip_build
 # Source2-md5:	462ca00be38471d19dc6e0f32c098275
-URL:		http://www.maxmind.com/
+URL:		https://www.maxmind.com/
 BuildRequires:	perl-Text-CSV_XS >= 0.69
 BuildRequires:	perl-base
 BuildRequires:	rpm >= 4.4.9-56
